@@ -1,26 +1,27 @@
-
 (function(){
-var toggle=document.getElementById('target-toggle'),menu=document.getElementById('target-menu'),draft=document.getElementById('draft'),status=document.getElementById('composer-status'),voice=document.getElementById('voice');
-var target='friend',drafts={friend:'',context:''},recognition=null,listening=false;
-function closeMenu(){menu.hidden=true;toggle.setAttribute('aria-expanded','false');}
-function stopVoice(){if(recognition&&listening)recognition.stop();}
-toggle.addEventListener('click',function(){menu.hidden=!menu.hidden;toggle.setAttribute('aria-expanded',String(!menu.hidden));});
-menu.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){stopVoice();drafts[target]=draft.value;target=button.dataset.target;draft.value=drafts[target];draft.maxLength=target==='friend'?240:600;toggle.innerHTML=(target==='friend'?'朋友说':'当时发生了什么')+' <span>⌃</span>';draft.placeholder=target==='friend'?'把朋友说的那句话写在这里…':'当时在聊什么？发生了什么？';closeMenu();status.textContent='';draft.focus();});});
-document.addEventListener('click',function(event){if(!event.target.closest('.target-wrap'))closeMenu();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
-document.getElementById('send').addEventListener('click',function(){stopVoice();var value=draft.value.trim();if(!value){status.textContent='先写点内容，再发送吧。';draft.focus();return;}document.getElementById(target==='friend'?'friend-message':'context-message').textContent=value;document.getElementById(target==='friend'?'phrase':'context').value=value;document.getElementById('result').hidden=true;draft.value='';drafts[target]='';status.textContent=target==='friend'?'已放进“朋友说”气泡。可以继续补充背景。':'背景已补充，点击“一起听听”查看解读。';});
-voice.addEventListener('click',function(){
- if(listening){stopVoice();return;}
- var Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!Speech){status.textContent='这个浏览器暂不支持语音输入。可以使用手机键盘自带的听写，或直接打字。';return;}
- var current=target,initial=draft.value;
- recognition=new Speech();recognition.lang='zh-CN';recognition.interimResults=false;recognition.continuous=false;
- recognition.onstart=function(){listening=true;voice.classList.add('recording');voice.setAttribute('aria-label','停止语音输入');status.textContent='正在听，再点麦克风可以停止。语音识别可能使用浏览器提供的在线服务。';};
- recognition.onresult=function(e){var text='';for(var i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)text+=e.results[i][0].transcript;}var result=(initial+text).slice(0,current==='friend'?240:600);drafts[current]=result;if(target===current)draft.value=result;status.textContent='已转成文字，确认后再发送。';};
- recognition.onerror=function(e){status.textContent=e.error==='not-allowed'?'未获得麦克风权限，请允许后重试，或使用键盘听写。':'语音识别没有完成，请重试或直接打字。';};
- recognition.onend=function(){listening=false;voice.classList.remove('recording');voice.setAttribute('aria-label','开始语音输入');};
- try{recognition.start();}catch(e){status.textContent='语音暂时无法启动，请直接打字或使用键盘听写。';}
+'use strict';
+var $=function(id){return document.getElementById(id);}, draft=$('draft'),context=$('draft-context'),status=$('composer-status'),voice=$('voice');
+var recognition=null,listening=false,active=draft;
+[draft,context].forEach(function(el){el.addEventListener('focus',function(){active=el;});});
+$('add-context').addEventListener('click',function(){var editor=$('context-editor');editor.hidden=!editor.hidden;this.setAttribute('aria-expanded',String(!editor.hidden));if(!editor.hidden)context.focus();});
+$('send').addEventListener('click',function(){
+ if(listening&&recognition)recognition.stop();
+ var phrase=draft.value.trim(),background=context.value.trim();
+ if(!phrase&&!$('phrase').value.trim()){status.textContent='先写下朋友说的那句话吧。';draft.focus();return;}
+ if(phrase){$('phrase').value=phrase;$('friend-message').textContent=phrase;}
+ if(background){$('context').value=background;$('context-message').textContent=background;}
+ $('sent-messages').hidden=false;$('sent-context').hidden=!$('context').value.trim();$('result').hidden=true;$('translate').hidden=false;draft.value='';context.value='';$('context-editor').hidden=true;$('add-context').setAttribute('aria-expanded','false');status.textContent='消息已发出，点击“一起听听”查看不同的理解。';
 });
+voice.addEventListener('click',function(){
+ if(listening){recognition.stop();return;}
+ var Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!Speech){status.textContent='浏览器暂不支持语音输入，请使用键盘听写或打字。';return;}
+ var target=active,initial=target.value;recognition=new Speech();recognition.lang='zh-CN';recognition.interimResults=false;
+ recognition.onstart=function(){listening=true;voice.classList.add('recording');voice.setAttribute('aria-label','停止语音输入');status.textContent='正在听：'+(target===context?'当时发生了什么':'朋友说')+'。再点麦克风停止。语音可能由浏览器在线服务识别。';};
+ recognition.onresult=function(e){var text='';for(var i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)text+=e.results[i][0].transcript;target.value=(initial+text).slice(0,target===context?600:240);status.textContent='已转成文字，确认后发送。';};
+ recognition.onerror=function(){status.textContent='语音识别未完成，请检查麦克风权限或直接打字。';};
+ recognition.onend=function(){listening=false;voice.classList.remove('recording');voice.setAttribute('aria-label','开始语音输入');};
+ try{recognition.start();}catch(e){status.textContent='语音暂时无法启动，请使用键盘听写。';}
+});
+$('settings-toggle').addEventListener('click',function(){var panel=$('key-settings');panel.open=!panel.open;});
 })();
-
-document.getElementById('settings-toggle').addEventListener('click',function(){var panel=document.getElementById('key-settings');panel.open=!panel.open;});
