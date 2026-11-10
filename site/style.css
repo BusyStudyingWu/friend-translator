@@ -10,6 +10,8 @@ header{position:relative;isolation:isolate;background:var(--deep);color:white;pa
 #result{border-top:1px solid #c6e1d8}
 #result header{min-height:0;background:transparent;color:var(--ink);padding:22px 24px 0}
 #result header p{color:var(--sub)}
+#quote mark{background:var(--mint);color:inherit;border-radius:.14em}
+#result #literal{max-width:100%;margin:0 0 16px;line-height:1.7;color:var(--ink)}
 #quote{margin-top:0;overflow-wrap:anywhere}
 header small{color:#c7efe0;font-size:13px}h1,h2{font:700 32px/1.45 var(--serif);margin:13px 0 14px}header p{font-size:14px;color:#e5f5ea;max-width:69%;margin:0;overflow-wrap:anywhere}
 .body{padding:20px}button,input,textarea{font:inherit;color:inherit}button,summary{cursor:pointer}button{border:0}button:hover{filter:brightness(.95)}:focus-visible{outline:3px solid #368a79;outline-offset:3px}button:disabled{opacity:.65;cursor:wait}
