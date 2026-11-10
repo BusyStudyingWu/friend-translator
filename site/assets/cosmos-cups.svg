@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">朋友话翻译器 · 格桑花纸杯电话</title>
+  <path id="cotton-thread" d="M55 137 C41 171 51 195 76 199 C101 204 126 178 139 158 C147 145 138 139 129 144 C115 151 119 173 136 185 C164 206 202 197 200 168 L197 149" fill="none" stroke="#07594E" stroke-width="5.4" stroke-linecap="round"/>
+  <g id="left-cup" transform="translate(74 92) rotate(22)">
+    <path fill="#07594E" d="M-47 -36 Q-47 -42 -40 -43 H40 Q47 -42 47 -36 L34 40 Q33 46 26 48 Q0 55 -26 48 Q-33 46 -34 40Z"/>
+    <ellipse cy="-37" rx="47" ry="13" fill="#07594E"/>
+    <ellipse cy="-37" rx="38" ry="6" fill="#C4EAD9"/>
+    <g id="left-cosmos" transform="translate(0 1) rotate(-8)">
+      <path d="M0 1 C-6 16 9 24 3 40" fill="none" stroke="#9FD8BD" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M5 33 Q-8 32 -13 23 Q0 22 5 33ZM5 28 Q10 18 21 18 Q18 26 5 28Z" fill="#9FD8BD"/>
+      <g fill="#F0F9EF">
+        <path d="M-4 -5 C-12 -12 -15 -23 -10 -26 C-7 -28 -5 -26 -4 -25 C-1 -28 2 -26 3 -23 C5 -16 0 -9 -1 -5Z"/>
+        <path d="M2 -6 C3 -16 9 -28 15 -26 C17 -25 16 -23 18 -23 C24 -24 21 -17 18 -13 C14 -8 9 -6 5 -4Z"/>
+        <path d="M6 -3 C14 -10 24 -16 29 -13 C32 -11 29 -9 30 -8 C33 -4 27 -1 21 1 C15 2 10 1 6 0Z"/>
+        <path d="M6 2 C16 1 29 5 29 11 C29 14 26 14 24 14 C24 19 18 17 14 14 C10 11 7 7 5 5Z"/>
+        <path d="M3 5 C11 9 18 19 15 23 C14 25 11 24 10 23 C7 27 3 22 2 17 C1 12 1 8 1 6Z"/>
+        <path d="M-2 6 C-3 14 -8 23 -14 23 C-17 23 -17 20 -17 18 C-21 17 -18 12 -14 9 C-10 5 -7 4 -5 4Z"/>
+        <path d="M-6 3 C-13 8 -25 12 -28 8 C-30 6 -28 4 -27 3 C-31 0 -26 -3 -21 -4 C-16 -5 -10 -3 -6 -1Z"/>
+        <path d="M-6 -2 C-16 -4 -27 -10 -26 -16 C-26 -19 -23 -18 -22 -18 C-21 -23 -15 -20 -12 -16 C-8 -12 -6 -7 -4 -5Z"/>
+      </g>
+      <ellipse rx="5.7" ry="4.9" fill="#9FD8BD"/>
+    </g>
+  </g>
+  <g id="right-cup" transform="translate(181 115) rotate(-19)">
+    <path fill="#90CEB6" d="M-47 -36 Q-47 -42 -40 -43 H40 Q47 -42 47 -36 L34 40 Q33 46 26 48 Q0 55 -26 48 Q-33 46 -34 40Z"/>
+    <ellipse cy="-37" rx="47" ry="13" fill="#90CEB6"/>
+    <ellipse cy="-37" rx="38" ry="6" fill="#206D60"/>
+    <g id="right-cosmos" transform="translate(0 1) rotate(7)">
+      <path d="M0 1 C-6 16 9 24 3 40" fill="none" stroke="#267668" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M5 33 Q-8 32 -13 23 Q0 22 5 33ZM5 28 Q10 18 21 18 Q18 26 5 28Z" fill="#267668"/>
+      <g fill="#07594E">
+        <path d="M-4 -5 C-12 -12 -15 -23 -10 -26 C-7 -28 -5 -26 -4 -25 C-1 -28 2 -26 3 -23 C5 -16 0 -9 -1 -5Z"/>
+        <path d="M2 -6 C3 -16 9 -28 15 -26 C17 -25 16 -23 18 -23 C24 -24 21 -17 18 -13 C14 -8 9 -6 5 -4Z"/>
+        <path d="M6 -3 C14 -10 24 -16 29 -13 C32 -11 29 -9 30 -8 C33 -4 27 -1 21 1 C15 2 10 1 6 0Z"/>
+        <path d="M6 2 C16 1 29 5 29 11 C29 14 26 14 24 14 C24 19 18 17 14 14 C10 11 7 7 5 5Z"/>
+        <path d="M3 5 C11 9 18 19 15 23 C14 25 11 24 10 23 C7 27 3 22 2 17 C1 12 1 8 1 6Z"/>
+        <path d="M-2 6 C-3 14 -8 23 -14 23 C-17 23 -17 20 -17 18 C-21 17 -18 12 -14 9 C-10 5 -7 4 -5 4Z"/>
+        <path d="M-6 3 C-13 8 -25 12 -28 8 C-30 6 -28 4 -27 3 C-31 0 -26 -3 -21 -4 C-16 -5 -10 -3 -6 -1Z"/>
+        <path d="M-6 -2 C-16 -4 -27 -10 -26 -16 C-26 -19 -23 -18 -22 -18 C-21 -23 -15 -20 -12 -16 C-8 -12 -6 -7 -4 -5Z"/>
+      </g>
+      <ellipse rx="5.7" ry="4.9" fill="#F0F9EF"/>
+    </g>
+  </g>
+</svg>

@@ -4,10 +4,11 @@ body{margin:0;background:#d8e9e1;color:var(--ink);font:16px/1.55 -apple-system,B
 [hidden]{display:none!important}
 main{width:390px;max-width:100%;margin:26px auto;overflow:hidden;border-radius:23px;background:var(--page)}
 header{position:relative;isolation:isolate;background:var(--deep);color:white;padding:24px;min-height:184px}
-header:after{content:"";position:absolute;right:12px;top:76px;width:108px;height:70px;z-index:-1;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 116 68'%3E%3Cdefs%3E%3Cpath id='q' d='M57 0C26 4 4 22 3 44c-1 15 8 24 22 24 15 0 24-10 24-23 0-12-9-21-20-21C36 15 45 10 57 6Z'/%3E%3C/defs%3E%3Cuse href='%23q' fill='%23409382'/%3E%3Cuse href='%23q' x='58' fill='%2376b8a6'/%3E%3C/svg%3E")}
+.brand-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+.brand-header p{max-width:none}
+.brand-logo{display:block;width:clamp(62px,20vw,88px);height:auto;background:var(--page);border-radius:22%}
 #result{border-top:1px solid #c6e1d8}
 #result header{min-height:0;background:transparent;color:var(--ink);padding:22px 24px 0}
-#result header::after{content:none}
 #result header p{color:var(--sub)}
 #quote{margin-top:0;overflow-wrap:anywhere}
 header small{color:#c7efe0;font-size:13px}h1,h2{font:700 32px/1.45 var(--serif);margin:13px 0 14px}header p{font-size:14px;color:#e5f5ea;max-width:69%;margin:0;overflow-wrap:anywhere}
