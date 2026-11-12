@@ -96,8 +96,9 @@ body.listening .play{animation:listenPulse 1.3s ease-in-out infinite}
 .result-head{padding:6px 4px 0;color:#232825}
 .eyebrow{font-size:12px;letter-spacing:.34em;color:#6d726e;margin:0 0 14px;animation:rainIn .8s .05s both}
 #quote{
-  font:italic 400 clamp(32px,8.5vw,48px)/1.5 var(--hand);
+  font:italic 400 clamp(26px,7vw,38px)/1.5 var(--hand);
   margin:0 0 18px;overflow-wrap:anywhere;color:#202422;
+  text-wrap:balance;
   text-shadow:0 1px 14px rgba(255,255,255,.65);
   animation:rainIn 1s .18s both;
 }
