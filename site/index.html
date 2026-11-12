@@ -1,24 +1,52 @@
 <!doctype html>
 <html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07594e"><title>朋友话翻译器</title>
+<meta name="theme-color" content="#b9bcb9"><title>朋友话翻译器</title>
 <link rel="icon" href="./assets/cosmos-cups.svg" type="image/svg+xml">
-<link rel="stylesheet" href="./style.css?v=placeholder-1"></head>
-<body><main>
-<section aria-labelledby="title">
-<header class="brand-header"><div><small>星星酱的友情实验室</small><h1 id="title">朋友话翻译器</h1><p>有时不是不在乎，只是没听明白。</p></div><img class="brand-logo" src="./assets/cosmos-cups.svg" width="88" height="88" alt="格桑花纸杯电话"></header>
-<div class="body">
+<link rel="stylesheet" href="./style.css?v=mock-11"></head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+<main>
+<div class="utilities">
 <details class="key-panel"><summary>连接你的 DeepSeek <span>仅本次使用 ›</span></summary>
-<div class="keys"><label for="api-key">你的 DeepSeek API Key</label><div class="row"><input id="api-key" type="password" autocomplete="off" spellcheck="false"><button id="clear-key">清空</button></div><p>密钥仅在本页内存使用。翻译时，原话和背景直接发往 DeepSeek，使用你的账户额度。</p></div></details>
-<label for="phrase">朋友说</label><div class="phrase-box"><textarea id="phrase" maxlength="240" placeholder="例如：你现在朋友挺多的。"></textarea><small id="count">0 / 240</small></div>
-<label for="context">当时发生了什么？ <small>选填</small></label><textarea id="context" maxlength="600" placeholder="比如，我刚发了一张聚餐照。我们最近确实很少见面。"></textarea>
-<button id="translate" class="primary">一起听听 ↗</button><button id="demo" class="secondary">试试内置示例</button><p id="notice" role="status"></p>
-<details class="extra"><summary>挑一句原话试试</summary><div class="samples"><button data-sample="0">随便你。</button><button data-sample="1">你朋友挺多的。</button><button data-sample="2">我画地为牢。</button><button data-sample="3">不用了，我自己来。</button></div></details>
-</div></section>
-<section id="result" hidden aria-live="polite" aria-labelledby="quote"><header><h2 id="quote"></h2><p id="literal"></p><p>也许，TA 想说…</p></header>
+<div class="keys"><label for="api-key">你的 DeepSeek API Key</label><div class="row"><input id="api-key" type="password" autocomplete="off" spellcheck="false"><button id="clear-key">清空</button></div><p>密钥仅在本页内存使用。<br>翻译时，原话和背景直接发往 DeepSeek，使用你的账户额度。</p></div></details>
+</div>
+<section class="input-stage" aria-labelledby="title">
+<h1 id="title" class="visually-hidden">朋友话翻译器</h1>
+<label for="phrase" class="stage-label">朋友说</label>
+<div class="speech"><textarea id="phrase" maxlength="240" placeholder="例如：你现在朋友挺多的。"></textarea><small id="count">0 / 240</small></div>
+<details class="context-panel" open><summary>当时发生了什么<small>（选填）</small></summary><textarea id="context" maxlength="600" placeholder="比如，我刚发了一张聚餐照。我们最近确实很少见面。"></textarea></details>
+<div class="listen">
+<div class="wave" aria-hidden="true"></div>
+<button id="translate" class="play" aria-label="一起听听"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5.5v13c0 .9.98 1.45 1.76.99l10.2-6.5a1.15 1.15 0 0 0 0-1.98L9.76 4.51A1.15 1.15 0 0 0 8 5.5z" fill="currentColor"/></svg></button>
+<div class="wave" aria-hidden="true"></div>
+</div>
+<p id="listen-caption" class="caption">聆听朋友的“心声”</p>
+<p id="notice" role="status"></p>
+</section>
+<section id="result" hidden aria-live="polite" aria-labelledby="quote"><header class="result-head"><p class="eyebrow">隔着雨声，再听一遍</p><h2 id="quote"></h2><p id="literal"></p><p class="hint">也许，TA 想说…</p></header>
 <div class="body"><div id="possibilities"></div>
-<article class="reply"><small>可以这样回</small><p id="ask"></p></article><p class="foot">三种可能，不是定论。</p>
-<details class="extra"><summary>看看解读依据</summary><small id="source"></small><div id="background-message" hidden><b>当时的背景</b><p id="background-text"></p></div><div><b>还需要问清的事</b><p id="missing"></p></div></details>
-<div id="switcher" hidden><p>换个背景，再听一遍</p><div class="samples"><button data-scene="0">正在选餐厅</button><button data-scene="1">第三次改约</button></div><p id="scene-description"></p></div>
+<article class="reply glass"><small>可以这样回</small><p id="ask"></p></article><p class="foot">三种可能，不是定论。</p>
+<details class="extra glass"><summary>看看解读依据</summary><small id="source"></small><div id="background-message" hidden><b>当时的背景</b><p id="background-text"></p></div><div><b>还需要问清的事</b><p id="missing"></p></div></details>
 <button id="again" class="secondary">↑ 补充背景，重新翻译</button></div></section>
-</main><script src="./app.js?v=reading-1"></script></body></html>
+</main>
+<script>
+/* 点击面板外任意位置，自动收起密钥面板 */
+document.addEventListener('click', function (e) {
+  var kp = document.querySelector('.key-panel');
+  if (kp && kp.open && !kp.contains(e.target)) kp.open = false;
+});
+/* 生成音波柱：高度随机起伏，各自错相律动 */
+document.querySelectorAll('.wave').forEach(function (w, wi) {
+  for (var i = 0; i < 64; i++) {
+    var b = document.createElement('i');
+    var r = ((i * 2654435761 + wi * 97) >>> 0) % 1000 / 1000;
+    var h = 12 + r * 78;
+    b.style.setProperty('--h', h.toFixed(0));
+    b.style.animationDelay = (((i * 137 + wi * 311) % 1800) / 1000).toFixed(2) + 's';
+    b.style.animationDuration = (1.4 + ((i * 91 + wi * 47) % 90) / 100).toFixed(2) + 's';
+    w.appendChild(b);
+  }
+});
+</script>
+<script src="./rain.js?v=mock-6"></script><script src="./app.js?v=mock-3"></script></body></html>
